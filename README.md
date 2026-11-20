@@ -144,9 +144,9 @@ The 5 assessment questions evaluated against the compendium corpus:
 
 #### [Q3] Envoys (Dutas) Classification
 > According to the text, there are exactly three distinct categories of envoys (Dutas) based on their level of authority [p. 19]. Their designations are:
-> 1. **Nisrishtarthah**: A Plenipotentiary Ambassador endowed with full ministerial qualifications and discretionary authority to negotiate treaties [p. 19].
-> 2. **Parimitarthah**: An Envoy Extraordinary entrusted with a strictly limited, predefined mission [p. 19].
-> 3. **Shasanaharah**: A Royal Messenger or Bearer of Dispatches authorized only to deliver written decrees [p. 19].
+> 1. Nisrishtarthah [p. 19]
+> 2. Parimitarthah [p. 19]
+> 3. Shasanaharah [p. 19]
 
 #### [Q4] Metaphor of Steady Wisdom (Sthitaprajna)
 > In Chapter 2, a person of steady wisdom (Sthitaprajna) who completely withdraws their senses from external sense objects is explicitly compared to a tortoise (kurma) drawing its head and limbs entirely inside its protective shell [p. 36].
@@ -193,19 +193,26 @@ Evaluated across in-scope topics:
 |                                    |   "BOOK VI, CHAPTER 1: THE SAPTANGA THEORY..."            |
 +------------------------------------+-----------------------------------------------------------+
 ```
-*(Placeholder for UI screenshots: `docs/screenshots/app_chat_view.png` and `docs/screenshots/app_evidence_panel.png`)*
+Run `streamlit run app.py` and add a screenshot to docs/screenshot.png
 
 ---
 
 ## 7. Limitations & Operating Boundaries
 
-1. **Corpus Scope:** The retrieval index covers the provided 50-page compendium. Questions regarding external historical events, unrelated texts, or contemporary politics are safely gated and refused.
-2. **API Quota Management:** Google Gemini Free Tier accounts impose a 5 requests-per-minute (RPM) rate limit. The application implements an exponential backoff retry loop and an automated extractive fallback to prevent failure during request spikes.
-3. **Lexical Normalization:** Diacritics in classical transliteration (e.g., *ś*, *ṣ*, *ṭ*, *dūta*) are mapped via light synonym expansion to maintain high recall across English ASCII spellings.
+1. **Corpus Distribution & Content Density:** The 50-page PDF has only a few content-rich pages (p. 8 Saptanga, p. 19 Envoys, p. 36 Gita 2.58 and similar), while most other pages are templated procedural text ("Reference Clause X.Y"), so retrieval for those pages works by topic heading only.
+2. **Corpus Scope:** The retrieval index covers the provided 50-page compendium. Questions regarding external historical events, unrelated texts, or contemporary politics are safely gated and refused.
+3. **API Quota Management:** Google Gemini Free Tier accounts impose a 5 requests-per-minute (RPM) rate limit. The application implements an exponential backoff retry loop and an automated extractive fallback to prevent failure during request spikes.
+4. **Lexical Normalization:** Diacritics in classical transliteration (e.g., *ś*, *ṣ*, *ṭ*, *dūta*) are mapped via light synonym expansion to maintain high recall across English ASCII spellings.
 
 ---
 
-## 8. Setup & Execution Instructions
+## 8. LLM Integration
+
+Answers use Gemini when a valid `GEMINI_API_KEY` is in `.env`, otherwise the system uses extractive mode with page citations. Users must create their own `.env` from `.env.example`. No key values anywhere in the README.
+
+---
+
+## 9. Setup & Execution Instructions
 
 ### Prerequisites
 - Python 3.10+ (Tested on Python 3.11 ARM64 / macOS)
