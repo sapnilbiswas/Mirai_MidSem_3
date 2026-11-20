@@ -90,7 +90,11 @@ class RAGPipeline:
         if self.api_key and self.api_key != "your_key_here":
             try:
                 from google import genai
-                self.genai_client = genai.Client(api_key=self.api_key)
+                from google.genai import types
+                self.genai_client = genai.Client(
+                    api_key=self.api_key,
+                    http_options=types.HttpOptions(timeout=15000)
+                )
                 logger.info(f"Initialized Gemini client with model '{self.model_name}'.")
             except Exception as e:
                 logger.warning(f"Failed to initialize Gemini client: {e}. Falling back to extractive mode.")
