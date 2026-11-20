@@ -8,6 +8,7 @@ extractive fallback if the Gemini API key is missing or invalid.
 
 import os
 import re
+import time
 import logging
 from typing import List, Dict, Any, Optional, Set, Tuple
 from dotenv import load_dotenv
@@ -24,8 +25,8 @@ logger = logging.getLogger(__name__)
 # Constants
 NOT_IN_CORPUS_MESSAGE = "This information is not available in the provided text."
 DEFAULT_RERANK_THRESHOLD = -2.0  # Calibrated threshold separating in-scope vs out-of-scope queries
-DEFAULT_MODEL = "gemini-3.8-flash"
-FALLBACK_MODELS = ["gemini-2.5-flash", "gemini-flash-latest"]
+DEFAULT_MODEL = "gemini-2.5-flash"
+FALLBACK_MODELS = ["gemini-3.8-flash", "gemini-flash-latest"]
 
 
 GROUNDED_SYSTEM_PROMPT = (
@@ -122,7 +123,11 @@ class RAGPipeline:
                 if "API_KEY_INVALID" in err_msg or "401" in err_msg or "403" in err_msg:
                     logger.error(f"Gemini API key rejected: {err_msg}")
                     return None
-                logger.warning(f"Model '{model}' failed: {e}. Trying next candidate...")
+                if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
+                    logger.warning(f"Rate limited on {model}. Pausing 6 seconds before trying next candidate...")
+                    time.sleep(6)
+                else:
+                    logger.warning(f"Model '{model}' failed: {e}. Trying next candidate...")
 
         return None
 
@@ -170,10 +175,10 @@ class RAGPipeline:
                 "mode": "none"
             }
 
-        # Reliability guard: Handle very long queries by truncating to ~150 words
+        # Reliability guard: Handle very long queries with head+tail truncation (~150 words)
         words = clean_query.split()
         if len(words) > 150:
-            clean_query = " ".join(words[:150])
+            clean_query = " ".join(words[:75] + words[-75:])
 
         # Retrieve candidates
         sources = self.retriever.retrieve(clean_query, top_k=top_k)
