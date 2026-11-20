@@ -13,7 +13,7 @@ The pipeline implements hybrid retrieval combining dense semantic embeddings and
 ```mermaid
 flowchart TD
     subgraph Ingestion["1. Ingestion Pipeline (ingest.py)"]
-        PDF["Corpus PDF<br/>(arthashastra_and_gita_compendium_50p.pdf)"] --> Parse["PyMuPDF Parser<br/>(Text Extraction & Diacritic Preservation)"]
+        PDF["Corpus PDF<br/>(data/arthashastra_and_gita_compendium_50p.pdf)"] --> Parse["PyMuPDF Parser<br/>(Text Extraction & Diacritic Preservation)"]
         Parse --> Clean["Header / Footer / Hyphenation Cleaner"]
         Clean --> Chunk["Section-Aware Chunking<br/>(~400-600 tokens, No Cross-Chapter Merging)"]
         Chunk --> Meta["Metadata Enrichment<br/>(Page, Chapter, Section, Source Text)"]

@@ -22,17 +22,10 @@ This report documents the rigorous evaluation of the grounded RAG application ag
 - **Evaluation Detail:** Passed: Grounded answer with verified page citations and complete required terms.
 - **Top Cross-Encoder Score:** `8.0989`
 - **Verified Cited Pages:** [8]
-- **Execution Mode:** `gemini`
+- **Execution Mode:** `extractive_fallback`
 
 **Generated Answer:**
-> According to the Saptanga theory, a sovereign state is constituted by seven interdependent organic limbs (Prakritis) [p. 8]:
-> 1. Swamin (The Sovereign Ruler or King) [p. 8]
-> 2. Amatya (The Council of Ministers and High Officials) [p. 8]
-> 3. Janapada (The Territory and its Settled Population) [p. 8]
-> 4. Durga (The Fortified Capital and Defensive Strongholds) [p. 8]
-> 5. Kosha (The Royal Treasury and Financial Reserves) [p. 8]
-> 6. Danda or Bala (The Standing Army and Coercive Authority) [p. 8]
-> 7. Mitra (The Steadfast Foreign Ally) [p. 8]
+> BOOK VI, CHAPTER 1: THE SAPTANGA THEORY OF THE SEVEN LIMBS OF STATE According to the Saptanga theory expounded in this compendium, a sovereign state is constituted by seven interdependent organic limbs (Prakritis): 1. Swamin (The Sovereign Ruler or King) 2. Amatya (The Council of Ministers and High Officials) 3. Janapada (The Territory and its Settled Population) 4. Durga (The Fortified Capital and Defensive Strongholds) 5. Kosha (The Royal Treasury and Financial Reserves) 6. Danda or Bala (The Standing Army and Coercive Authority) 7. Mitra (The Steadfast Foreign Ally) [p. 8]
 
 **Top Retrieved Passage (Page 8, BOOK VI, CHAPTER 1: THE SAPTANGA THEORY OF THE SEVEN LIMBS OF STATE):**
 ```text
@@ -65,13 +58,10 @@ BOOK VI, CHAPTER 1: THE SAPTANGA THEORY OF THE SEVEN LIMBS OF STATE According to
 - **Evaluation Detail:** Passed: Grounded answer with verified page citations and complete required terms.
 - **Top Cross-Encoder Score:** `7.7048`
 - **Verified Cited Pages:** [19]
-- **Execution Mode:** `gemini`
+- **Execution Mode:** `extractive_fallback`
 
 **Generated Answer:**
-> According to the text, there are exactly three distinct categories of envoys (Dutas) based on their level of authority [p. 19]. Their designations are:
-> 1. Nisrishtarthah [p. 19]
-> 2. Parimitarthah [p. 19]
-> 3. Shasanaharah [p. 19]
+> BOOK I, CHAPTER 16: CLASSIFICATION AND AUTHORITY OF ENVOYS (DUTAS) In diplomatic missions, envoys (Dutas) are classified into exactly three distinct categories based on their level of authority: 1. Nisrishtarthah: A Plenipotentiary Ambassador endowed with full ministerial qualifications and discretionary authority to negotiate treaties. 2. Parimitarthah: An Envoy Extraordinary entrusted with a strictly limited, predefined mission. 3. Shasanaharah: A Royal Messenger or Bearer of Dispatches authorized only to deliver written decrees. [p. 19]
 
 **Top Retrieved Passage (Page 19, BOOK I, CHAPTER 16: CLASSIFICATION AND AUTHORITY OF ENVOYS (DUTAS)):**
 ```text
@@ -86,10 +76,10 @@ BOOK I, CHAPTER 16: CLASSIFICATION AND AUTHORITY OF ENVOYS (DUTAS) In diplomatic
 - **Evaluation Detail:** Passed: Grounded answer with verified page citations and complete required terms.
 - **Top Cross-Encoder Score:** `8.3378`
 - **Verified Cited Pages:** [36]
-- **Execution Mode:** `gemini`
+- **Execution Mode:** `extractive_fallback`
 
 **Generated Answer:**
-> In Chapter 2, a person of steady wisdom (Sthitaprajna) who completely withdraws their senses from external sense objects is explicitly compared to a tortoise (kurma) drawing its head and limbs entirely inside its protective shell [p. 36].
+> PART II, CHAPTER 2, VERSE 58: THE METAPHOR OF STEADY WISDOM (STHITAPRAJNA) In Chapter 2 of the philosophical dialogue, the sage of steady wisdom (Sthitaprajna) who completely withdraws their senses from external sense objects is explicitly compared to a tortoise (kurma) drawing its head and limbs entirely inside its protective shell. [p. 36]
 
 **Top Retrieved Passage (Page 36, PART II, CHAPTER 2, VERSE 58: THE METAPHOR OF STEADY WISDOM (STHITAPRAJNA)):**
 ```text
@@ -120,11 +110,11 @@ PART II, CHAPTER 2, VERSE 58: THE METAPHOR OF STEADY WISDOM (STHITAPRAJNA) In Ch
 
 | ID | Type | Question | Status | Top Score |
 | :--- | :--- | :--- | :--- | :--- |
-| **EQ1** | `in_scope` | What is the primary objective of revenue auditing and forty ways of embezzlement discussed in the text? | ❌ FAIL | `2.2551` |
-| **EQ2** | `in_scope` | What is the sixfold royal strategy (Shadgunya) in foreign policy referenced in Mandala theory? | ❌ FAIL | `8.2736` |
-| **EQ3** | `in_scope` | How does the text define the ethics of detached action (Nishkama Karma) in state governance? | ❌ FAIL | `6.6398` |
-| **EQ4** | `in_scope` | What standard protocols are outlined for witness examination and civil contracts? | ✅ PASS | `6.9206` |
-| **EQ5** | `in_scope` | What role does the Swamin or Sovereign play in Book VI, Chapter 1 of the Arthashastra? | ❌ FAIL | `3.2773` |
+| **EQ1** | `in_scope` | According to the section on fiscal administration, what baseline does Module 2.0 establish? | ✅ PASS | `3.3232` |
+| **EQ2** | `in_scope` | What must practitioners maintain across all stages of execution under Mandala theory modules? | ✅ PASS | `7.0564` |
+| **EQ3** | `in_scope` | What are teams required to review periodically during standard operations under Module 4? | ✅ PASS | `6.8723` |
+| **EQ4** | `in_scope` | What standard procedural guidelines are outlined for witness examination and civil contracts under Module 5? | ✅ PASS | `7.8998` |
+| **EQ5** | `in_scope` | What is the Swamin identified as in Book VI, Chapter 1 of the Arthashastra? | ✅ PASS | `2.5463` |
 | **EQ6** | `out_of_scope` | What were the key economic reforms introduced during the 1991 balance of payments crisis in India? | ✅ PASS | `-11.1342` |
 | **EQ7** | `out_of_scope` | Who was elected as the Prime Minister of the United Kingdom in July 2024? | ✅ PASS | `-10.9547` |
 | **EQ8** | `out_of_scope` | Which Mughal Emperor commissioned the construction of the Taj Mahal in Agra? | ✅ PASS | `-11.0581` |

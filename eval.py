@@ -7,6 +7,7 @@ calibration, and outputs full reports to eval_results.md and stdout.
 """
 
 import os
+import time
 import json
 import logging
 from typing import List, Dict, Any, Tuple
@@ -269,6 +270,7 @@ def run_full_evaluation():
     print("\n--- RUNNING 5 ASSESSMENT QUESTIONS ---")
     assessment_results = []
     for item in ASSESSMENT_QUESTIONS:
+        time.sleep(2)
         resp = rag.answer(item["question"], top_k=6)
         passed, reason = evaluate_response(item, resp)
         res_record = {
@@ -288,6 +290,7 @@ def run_full_evaluation():
     print("\n--- RUNNING 10 EXTENDED BENCHMARK QUESTIONS ---")
     extra_results = []
     for item in EXTRA_QUESTIONS:
+        time.sleep(3)
         resp = rag.answer(item["question"], top_k=6)
         passed, reason = evaluate_response(item, resp)
         extra_results.append({
